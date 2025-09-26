@@ -1,0 +1,66 @@
+.messages-container {
+    background-color: #1a1a1a;
+    border-right: 2px solid #333;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 30vw;
+    height: 100vh;
+    z-index: 999;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.messages-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #2a2a2a;
+    border-bottom: 1px solid #444;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.messages-header h2 {
+    color: #fff;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.messages-container .close-button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+}
+
+.messages-container .close-button:hover {
+    background-color: #404040;
+    color: #fff;
+}
+
+.messages-container .close-button:active {
+    background-color: #505050;
+}
+
+.messages-content {
+    padding: 20px;
+    color: #ccc;
+}
+
+.messages-content p {
+    margin: 0;
+    line-height: 1.6;
+}
