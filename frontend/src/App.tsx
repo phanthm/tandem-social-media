@@ -1,15 +1,16 @@
+import { Route, Routes } from "react-router-dom";
 import "./stylesheets/App.css";
-import Map from "./components/Map";
-import MessagesContainer from "./components/MessagesContainer";
-import ForumContainer from "./components/ForumContainer";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
 
 function App() {
   return (
-    <>
-      <MessagesContainer />
-      <Map />
-      <ForumContainer />
-    </>
+    <div>
+      <Routes>
+        <Route path="/" element=<Home /> />
+        <Route path="/login" element=<Login /> />
+      </Routes>
+    </div>
   );
 }
 
