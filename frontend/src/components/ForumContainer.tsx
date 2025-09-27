@@ -1,25 +1,19 @@
 import "../stylesheets/ForumContainer.css";
 
-interface ForumContainerProps {
-  onClose: () => void;
-}
-
-export default function ForumContainer({ onClose }: ForumContainerProps) {
+export default function ForumContainer() {
   return (
     <div className="forum-container">
-      <div className="forum-header">
-        <h2>Forum</h2>
-        <button
-          className="close-button"
-          onClick={onClose}
-          aria-label="Close forum"
-        >
-          ×
-        </button>
-      </div>
-      <div className="forum-content">
-        <p>WIP</p>
-      </div>
+      <button
+        className="forum-close-button"
+        onClick={() => {
+          const container = document.querySelector(".forum-container");
+          if (container) {
+            container.classList.toggle("is-open");
+          }
+        }}
+        aria-label="Close forum"
+      ></button>
+      <div className="forum"></div>
     </div>
   );
 }

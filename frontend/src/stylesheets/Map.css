@@ -1,5 +1,3 @@
 .map-container {
-    position: fixed;
-    bottom: 0;
-    height: 95vh;
+    height: 100vh;
 }
