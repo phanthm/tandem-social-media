@@ -1,14 +1,6 @@
-// app.js
-
-// 1. Imports and Basic Setup
-// require("dotenv").config();
-// const express = require("express");
-// const passport = require("passport");
-// const session = require("express-session");
-// const GoogleStrategy = require("passport-google-oauth20").Strategy;
-
 import "dotenv/config";
 import express from "express";
+import cors from "cors";
 import session from "express-session";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
@@ -17,6 +9,17 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 import authRoutes from "./routes/auth.routes.js";
+
+// Enable CORS for frontend
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  }),
+);
+
+// Parse JSON bodies
+app.use(express.json());
 
 // 2. Session Management
 app.use(
@@ -41,9 +44,6 @@ passport.use(
       callbackURL: "/auth/google/callback",
     },
     (accessToken, refreshToken, profile, done) => {
-      // This function is called after successful authentication.
-      // 'profile' contains the user's Google profile information.
-      // In a real app, you would find or create a user in your database.
       console.log(profile);
       return done(null, profile);
     },
