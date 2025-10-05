@@ -26,7 +26,7 @@ router.get(
   async (req, res) => {
     const user_id = req.user.id;
 
-    const user = await User.findOne({ user_id });
+    const user = await User.findOne({ id: user_id });
 
     if (!user) {
       const new_user = new User({
@@ -38,7 +38,7 @@ router.get(
 
       try {
         await new_user.save();
-        console.log(new_user);
+        console.log("User saved: " + new_user.id);
       } catch {
         console.log("failed to save user details");
       }

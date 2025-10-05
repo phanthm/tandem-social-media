@@ -20,7 +20,10 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
-const api = axios.create({ baseURL: API_BASE_URL });
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  withCredentials: true,
+});
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -28,13 +31,11 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Configure axios to include credentials
-  axios.defaults.withCredentials = true;
-
   const checkAuth = async () => {
     try {
       const response = await api.get(`/auth/user`);
       if (response.data.success) {
+        console.log(response.data.user);
         setUser(response.data.user);
       } else {
         setUser(null);
@@ -48,7 +49,6 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const login = () => {
-    // Redirect to backend Google OAuth endpoint
     window.location.href = `${API_BASE_URL}/auth/google`;
   };
 
