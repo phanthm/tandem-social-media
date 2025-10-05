@@ -1,6 +1,8 @@
 import express from "express";
 import passport from "passport";
 
+import User from "../model/user.model.js";
+
 const router = express.Router();
 
 const url = process.env.FRONTEND_URL;
@@ -21,8 +23,27 @@ router.get(
 router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/auth/failed" }),
-  (req, res) => {
-    // Redirect to frontend with success
+  async (req, res) => {
+    const user_id = req.user.id;
+
+    const user = await User.findOne({ user_id });
+
+    if (!user) {
+      const new_user = new User({
+        id: req.user.id,
+        displayName: req.user.displayName,
+        email: req.user.emails[0].value,
+        photo: req.user.photos[0].value,
+      });
+
+      try {
+        await new_user.save();
+        console.log(new_user);
+      } catch {
+        console.log("failed to save user details");
+      }
+    }
+
     res.redirect(`${url}/`);
   },
 );
