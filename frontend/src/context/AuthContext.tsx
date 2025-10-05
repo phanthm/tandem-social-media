@@ -19,7 +19,8 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-const API_BASE_URL = "http://localhost:3000";
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const api = axios.create({ baseURL: API_BASE_URL });
 
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   children,
@@ -32,7 +33,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const checkAuth = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/auth/user`);
+      const response = await api.get(`/auth/user`);
       if (response.data.success) {
         setUser(response.data.user);
       } else {
@@ -53,7 +54,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
   const logout = async () => {
     try {
-      await axios.get(`${API_BASE_URL}/auth/logout`);
+      await api.get(`/auth/logout`);
       setUser(null);
     } catch (error) {
       console.error("Logout error:", error);
@@ -72,7 +73,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     checkAuth,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}> {children} </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => {

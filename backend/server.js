@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 import authRoutes from "./routes/auth.routes.js";
+import connectToMongoDB from "./db/connectToDB.js";
 
 // Enable CORS for frontend
 app.use(
@@ -70,5 +71,6 @@ app.use("/auth", authRoutes);
 
 // 7. Start the server
 app.listen(PORT, () => {
+  connectToMongoDB();
   console.log(`Server is running on http://localhost:${PORT}`);
 });
