@@ -19,6 +19,11 @@ app.use(
   }),
 );
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", process.env.FRONTEND_URL);
+  next();
+});
+
 // Parse JSON bodies
 app.use(express.json());
 
@@ -28,7 +33,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }, // Set to true if you are using https
+    cookie: { secure: false },
   }),
 );
 
@@ -60,11 +65,6 @@ passport.serializeUser((user, done) => {
 // This retrieves the user information from the session.
 passport.deserializeUser((user, done) => {
   done(null, user);
-});
-
-// 6. Define Routes
-app.get("/", (req, res) => {
-  res.send('<a href="/auth/google">Authenticate with Google</a>');
 });
 
 app.use("/auth", authRoutes);

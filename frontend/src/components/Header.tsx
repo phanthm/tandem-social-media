@@ -5,9 +5,9 @@ import "../stylesheets/Header.css";
 const Header: React.FC = () => {
   const { user, logout, loading } = useAuth();
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     try {
-      await logout();
+      logout();
     } catch (error) {
       console.error("Logout failed:", error);
     }
@@ -17,7 +17,7 @@ const Header: React.FC = () => {
     return (
       <header className="header">
         <div className="header-content">
-          <h1 className="app-title">Tandem Social Media</h1>
+          <h1 className="app-title">Tandem</h1>
           <div className="user-section">
             <span className="loading-text">Loading...</span>
           </div>
@@ -29,7 +29,7 @@ const Header: React.FC = () => {
   return (
     <header className="header">
       <div className="header-content">
-        <h1 className="app-title">Tandem Social Media</h1>
+        <h1 className="app-title">Tandem</h1>
         {user ? (
           <div className="user-section">
             <div className="user-info">
@@ -44,7 +44,6 @@ const Header: React.FC = () => {
                   }}
                 />
               )}
-              <span className="user-name">{user.displayName || "User"}</span>
             </div>
             <button
               onClick={handleLogout}

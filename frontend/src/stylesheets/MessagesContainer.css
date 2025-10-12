@@ -1,30 +1,37 @@
 .messages-container {
     display: flex;
     flex-direction: row;
+    align-items: center;
     position: fixed;
     left: 0;
-    top: 0;
-    width: 40vw;
-    height: 100vh;
+    top: 175px;
+    width: 32vw;
+    max-width: 400px;
     z-index: 1000;
-
-    transform: translateX(calc(-100% + 25px));
-    transition: transform 0.3s ease-in-out;
-}
-
-.messages-container.is-open {
-    transform: translateX(0);
-}
-
-.messages-close-button {
-    position: relative;
-    top: 50%;
-    width: 25px;
-    height: 40px;
 }
 
 .messages {
     width: 100%;
-    height: 100%;
-    background-color: royalblue;
+    min-height: 700px;
+    padding: 20px;
+    background-color: lightslategray;
+    border-radius: 40px;
+    border: 6px solid black;
+
+    transform: translateX(calc(-85%));
+    transition: transform 0.3s ease-in-out;
+}
+
+.messages.is-open {
+    transform: translateX(0);
+}
+
+.messages-close-button {
+    display: none;
+}
+
+.messages-close-button.is-visible {
+    display: block;
+    height: 50px;
+    width: 35px;
 }

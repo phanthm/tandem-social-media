@@ -5,7 +5,7 @@
   "main": "backend/server.js",
   "type": "module",
   "scripts": {
-    "dev": "cd ./backend && npm start && cd ../frontend && npm run dev"
+    "dev": "node ./backend/server.js"
   },
   "repository": {
     "type": "git",

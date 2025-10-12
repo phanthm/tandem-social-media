@@ -5,7 +5,7 @@ import User from "../model/user.model.js";
 
 const router = express.Router();
 
-const url = process.env.FRONTEND_URL;
+const frontend_url = process.env.FRONTEND_URL;
 
 const isLoggedIn = (req, res, next) => {
   if (req.user) {
@@ -44,12 +44,12 @@ router.get(
       }
     }
 
-    res.redirect(`${url}/`);
+    res.redirect(`${frontend_url}/`);
   },
 );
 
 router.get("/failed", (req, res) => {
-  res.redirect(`${url}/login?error=auth_failed`);
+  res.redirect(`${frontend_url}/login?error=auth_failed`);
 });
 
 // Get current user info (for frontend)
@@ -85,7 +85,7 @@ router.get("/logout", (req, res) => {
         .json({ success: false, message: "Error logging out" });
     }
     req.logout(() => {
-      res.redirect(`${url}/login`);
+      res.redirect(`${frontend_url}/login`);
     });
   });
 });
