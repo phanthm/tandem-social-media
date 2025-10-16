@@ -1,14 +1,17 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 import type { LatLngTuple } from "leaflet";
 import "../stylesheets/Map.css";
-const Guwahati: LatLngTuple = [26.16, 91.7486];
+import { useLocation } from "../context/LocationContext";
+// const Guwahati: LatLngTuple = [26.16, 91.7486];
+const London: LatLngTuple = [51.5072, 0.1276];
 
 export default function Map() {
+  const { location } = useLocation();
   return (
     <div className="map-container">
       <MapContainer
-        center={Guwahati}
-        zoom={13}
+        center={location ? location : London}
+        zoom={12}
         scrollWheelZoom={true}
         className="leaflet-container"
       >
